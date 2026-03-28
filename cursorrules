@@ -1,0 +1,42 @@
+# .cursorrules — WeThru Landing Page
+
+## 프로젝트 개요
+- 위쓰루(WeThru) B2B 컨설팅 랜딩페이지
+- 순수 HTML + CSS + Vanilla JS (프레임워크 없음)
+- 한국어 우선, 영어는 라벨/브랜드명에만 사용
+
+## 파일 구조 규칙
+- HTML은 index.html 단일 파일
+- CSS는 css/ 폴더에 섹션별 분리 (variables.css 필수 참조)
+- JS는 js/ 폴더에 기능별 분리 (config.js에 설정값 집중)
+- 이미지는 assets/ 폴더
+
+## 코딩 규칙
+- 외부 라이브러리, CDN, npm 패키지 사용 금지
+- CSS 변수는 반드시 variables.css에 정의
+- !important 사용 금지
+- 인라인 스타일 사용 금지
+- JS에서 document.write 사용 금지
+- console.log는 개발 중에만 (TODO 주석 표기)
+
+## 성능 규칙
+- 단일 CSS 파일 50KB 초과 금지
+- 단일 JS 파일 20KB 초과 금지
+- 이미지는 WebP 우선, 100KB 이하 권장
+- 폰트는 Noto Sans KR (Google Fonts) 단일 사용
+- CSS 애니메이션만 사용 (JS 애니메이션 최소화)
+
+## 디자인 시스템
+- Primary: #1B2A4A (navy)
+- Accent: #D4A843 (gold)
+- Background: #FFFFFF
+- Text: #2D2D2D
+- Gray: #8A8F98
+- Border: #E2E4E8
+- 폰트: Noto Sans KR (300,400,500,700,900)
+- 모바일 브레이크포인트: 900px, 600px
+
+## 수정 시 주의
+- config.js의 KAKAO_CHAT_URL은 배포 전 반드시 실제 URL로 교체
+- 가격 데이터 변경 시 index.html의 서비스 섹션과 비교 테이블 동시 수정
+- 통계 데이터 변경 시 출처(source)도 함께 업데이트
