@@ -6,9 +6,10 @@
 <title>WeThru 위쓰루 — 대표님의 사업, 함께 관통합니다</title>
 <meta name="description" content="사업계획서·발표자료·비즈니스 프로필·랜딩페이지·홈페이지 — 따로 맡기면 4곳, 위쓰루는 1곳에서 총괄합니다."/>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans KR',Pretendard,sans-serif;color:#2D2D2D;background:#FFFFFF;overflow-x:hidden}
+body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#2D2D2D;background:#FFFFFF;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 .container{max-width:1080px;margin:0 auto;padding:0 24px}
@@ -89,7 +90,6 @@ img{max-width:100%;display:block}
 .tier-table td{padding:11px 8px;font-size:.88rem;border-bottom:1px solid #E2E4E8}
 .tier-table td:last-child{font-weight:700;color:#1B2A4A;text-align:right}
 .service-note{font-size:.75rem;color:#8A8F98;margin-top:8px;line-height:1.6;padding:10px 14px;background:#F8F8FA;border-radius:8px}
-@media(max-width:900px){.services-grid{grid-template-columns:1fr}}
 
 /* PORTFOLIO */
 .portfolio{padding:100px 0;background:#F8F8FA}
@@ -154,36 +154,103 @@ footer{background:#1B2A4A;color:rgba(255,255,255,.5);padding:60px 0 32px}
 .modal .btn-submit{width:100%;margin-top:24px;padding:14px;background:#D4A843;color:#1B2A4A;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer}
 .modal .btn-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#8A8F98}
 
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1001}
+.hamburger span{display:block;width:24px;height:2px;background:#FFFFFF;transition:transform .3s,opacity .3s}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.mobile-menu{display:flex;position:fixed;top:0;right:-100%;width:280px;height:100vh;background:#1B2A4A;padding:80px 32px 40px;flex-direction:column;gap:0;z-index:999;transition:right .3s ease;overflow-y:auto}
+.mobile-menu.active{right:0}
+.mobile-menu-header{position:absolute;top:16px;right:16px}
+.mobile-close{background:none;border:none;color:#FFFFFF;font-size:2rem;cursor:pointer}
+.mobile-link{display:block;padding:16px 0;color:rgba(255,255,255,.8);font-size:1rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);transition:color .2s}
+.mobile-link:hover{color:#FFFFFF}
+.mobile-link.cta{margin-top:24px;background:#D4A843;color:#1B2A4A;text-align:center;padding:14px 0;border-radius:8px;font-weight:700;border-bottom:none}
+.mobile-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:998}
+.mobile-overlay.active{display:block}
+
+/* TOUCH TARGETS */
+button,a,.filter-btn,.nav-links a,.btn-consult{min-height:44px;min-width:44px}
+
 /* ANIMATIONS */
 .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 /* RESPONSIVE */
-@media(max-width:900px){
+/* ===== 태블릿 가로 (1024px 이하) ===== */
+@media(max-width:1024px){
   .nav{padding:0 24px}
-  .nav-links{display:none}
-  .hero h1{font-size:2rem}
-  .stats-grid{grid-template-columns:1fr}
-  .problem-grid{grid-template-columns:1fr;border-top:none}
-  .problem-item{padding:40px 0;border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
-  .problem-item:nth-child(2){padding-left:0}
-  .problem-item:last-child{padding-left:0;border-bottom:none}
+  .nav-links{gap:20px}
+  .nav-links a{font-size:.75rem}
+  .container{padding:0 20px}
+  .hero h1{font-size:2.2rem}
+  .stats-grid{gap:20px}
+  .service-block{padding:36px 28px}
   .portfolio-grid{grid-template-columns:repeat(2,1fr)}
-  .test-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr}
-  .cmp-table{font-size:.8rem}
-  .logo-sub{display:none}
+  .cmp-table{font-size:.85rem}
 }
-@media(max-width:600px){
-  .hero{padding:120px 0 60px}
-  .hero h1{font-size:1.6rem}
-  .stat-number{font-size:1.7rem}
-  .service-block{padding:32px 20px}
-  .portfolio-grid{grid-template-columns:1fr}
-  .trust-bar{flex-direction:column;gap:20px;align-items:center}
+
+/* ===== 태블릿 세로 / 큰 모바일 (768px 이하) ===== */
+@media(max-width:768px){
+  .nav{padding:0 20px;height:60px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{padding:100px 0 60px}
+  .hero h1{font-size:1.8rem}
+  .hero-desc{font-size:.95rem}
+  .cta-buttons{flex-direction:column;align-items:stretch}
+  .cta-buttons button{width:100%;justify-content:center}
+  .stats-grid{grid-template-columns:1fr;gap:16px}
+  .stat-card{padding:24px 20px}
+  .stat-number{font-size:1.8rem}
+  .problem-grid{grid-template-columns:1fr;gap:16px}
+  .services-grid{grid-template-columns:1fr}
+  .service-block{padding:28px 20px}
+  .price-table{font-size:.85rem}
+  .price-table th,.price-table td{padding:10px 8px}
+  .portfolio-grid{grid-template-columns:1fr;gap:20px}
+  .cmp-table{font-size:.8rem}
+  .cmp-table th,.cmp-table td{padding:12px 8px}
+  .testimonial-grid{grid-template-columns:1fr;gap:16px}
+  .test-grid{grid-template-columns:1fr;gap:16px}
+  .final-cta h2{font-size:1.6rem}
+  .final-cta .cta-buttons{flex-direction:column;align-items:stretch}
+  .final-cta .cta-buttons button{width:100%}
+  .trust-bar{flex-direction:column;gap:16px;align-items:center}
+  .footer-top{grid-template-columns:1fr;gap:24px}
+  .logo-sub{display:none}
   .logo-main{font-size:.95rem;letter-spacing:2px}
-  .logo-box{height:36px;width:36px}
-  .cta-buttons{flex-direction:column;align-items:center}
+  .logo-box{width:36px;height:36px}
+}
+
+/* ===== 모바일 (480px 이하) ===== */
+@media(max-width:480px){
+  .nav{padding:0 16px;height:56px}
+  .hero{padding:80px 0 40px}
+  .hero h1{font-size:1.4rem;line-height:1.4}
+  .hero-desc{font-size:.88rem}
+  .hero-tag{font-size:.7rem}
+  .container{padding:0 16px}
+  .stat-number{font-size:1.5rem}
+  .stat-card{padding:20px 16px}
+  .service-block{padding:24px 16px}
+  .price-table{font-size:.78rem}
+  .price-table th,.price-table td{padding:8px 6px}
+  .section-tag{font-size:.7rem}
+  section h2{font-size:1.4rem}
+  .pf-card h4{font-size:.9rem}
+  .filter-btn{font-size:.78rem;padding:6px 14px}
+  .cmp-table th,.cmp-table td{padding:10px 6px;font-size:.75rem}
+  .testimonial-card{padding:24px 20px}
+  .testimonial-card p{font-size:.88rem}
+  .final-cta h2{font-size:1.3rem}
+  .final-cta .btn-kakao,.final-cta .btn-form{padding:14px 24px;font-size:.9rem}
+  .modal{padding:24px 20px;width:95%}
+  .logo-main{font-size:.85rem;letter-spacing:1.5px}
+  .logo-box{width:32px;height:32px}
 }
 </style>
 </head>
@@ -208,7 +275,22 @@ footer{background:#1B2A4A;color:rgba(255,255,255,.5);padding:60px 0 32px}
     <a href="#testimonials">Testimonials</a>
     <a href="#final-cta" class="btn-consult">Consulting →</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <button class="mobile-close" id="mobileClose" aria-label="메뉴 닫기">&times;</button>
+  </div>
+  <a href="#problem" class="mobile-link">Problem</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#portfolio" class="mobile-link">Portfolio</a>
+  <a href="#comparison" class="mobile-link">Comparison</a>
+  <a href="#testimonials" class="mobile-link">Testimonials</a>
+  <a href="#final-cta" class="mobile-link cta">무료 상담 →</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -218,13 +300,13 @@ footer{background:#1B2A4A;color:rgba(255,255,255,.5);padding:60px 0 32px}
     <p class="hero-desc fade-up">사업계획서 · 발표자료 · 비즈니스 프로필 · 홈페이지 —<br><strong>따로 맡기면 4곳, 위쓰루는 1곳에서 총괄합니다.</strong></p>
     <p class="hero-sub fade-up">단순히 시간 일만 끝내는 외주사가 아닙니다. 대표님의 사업 청사진을 함께 의논하고, 선택을 설정하고,<br>끝까지 나아갑니다. 일회성 거래가 아닌, 함께 성장하는 파트너.</p>
     <div class="cta-buttons fade-up">
-      <button class="btn-kakao" onclick="openKakao()">
+      <a href="https://bit.ly/wethru-consulting" target="_blank" rel="noopener noreferrer" class="btn-kakao">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="#1B2A4A"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.53c-.08.3.26.54.52.37L10.2 18.6c.59.08 1.19.12 1.8.12 5.52 0 10-3.58 10-7.9S17.52 3 12 3z"/></svg>
-        카카오톡 무료 상담 →
-      </button>
+        무료 상담 신청하기 →
+      </a>
       <button class="btn-form" onclick="openModal()">상담 폼 작성하기 →</button>
     </div>
-    <div class="cta-or fade-up">카카오톡이 더 빠릅니다 · 평균 응답 2시간 이내</div>
+    <div class="cta-or fade-up">무료 상담 신청하기 → · 평균 응답 2시간 이내</div>
   </div>
 </section>
 
@@ -322,12 +404,13 @@ footer{background:#1B2A4A;color:rgba(255,255,255,.5);padding:60px 0 32px}
         <span class="service-num">SERVICE 03</span>
         <h3>비즈니스 프로필 · 명함</h3>
         <span class="service-en">BUSINESS PROFILE &amp; CARD</span>
-        <p class="service-desc">기업 소개서·회사 프로필·명함을 일관된 브랜드 톤으로 제작합니다. 홈페이지와 함께 제작 시 15% 할인.</p>
+        <p class="service-desc">검색 결과에서 당신을 대신해 말하는 비즈니스 프로필. 디지털 명함·웹 프로필·QR코드를 한 번에 제작합니다. 홈페이지와 함께 의뢰 시 15% 할인.</p>
         <table class="tier-table"><thead><tr><th>Tier</th><th>구성</th><th>가격</th></tr></thead><tbody>
-          <tr><td>BASIC</td><td>프로필 4P + 명함</td><td>₩200,000</td></tr>
-          <tr><td>PRO</td><td>프로필 8P + 명함 + 리플렛</td><td>₩500,000</td></tr>
-          <tr><td>PREMIUM</td><td>프로필 16P + 명함 + 브로셔</td><td>₩1,000,000</td></tr>
+          <tr><td>BASIC</td><td>디자인안 1개 · QR 디지털 명함 · 웹사이트 제공 · 수정 2회</td><td>₩200,000</td></tr>
+          <tr><td>PRO</td><td>디자인안 2개 · QR 디지털 명함 · 포트폴리오/IR 배치 · 수정 3회</td><td>₩500,000</td></tr>
+          <tr><td>PREMIUM</td><td>디자인안 2개 · 전략 컨설팅 · SEO/GEO 최적화 · 커스텀 도메인 · 수정 5회</td><td>₩1,000,000</td></tr>
         </tbody></table>
+        <a href="https://ceoys.github.io/WeThru_Profile_service/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:16px;font-size:.85rem;font-weight:600;color:#D4A843;">자세히 보기 →</a>
       </div>
       <div class="service-block fade-up">
         <span class="service-num">SERVICE 04</span>
@@ -441,16 +524,16 @@ footer{background:#1B2A4A;color:rgba(255,255,255,.5);padding:60px 0 32px}
     <h2 class="fade-up">지금, <em>함께 시작</em>하시겠습니까?</h2>
     <p class="cta-sub fade-up">편한 방법으로 연락주세요.<br>대표님의 상황에 맞는 최적의 전략을 제안드립니다.</p>
     <div class="cta-buttons fade-up">
-      <button class="btn-kakao" onclick="openKakao()">
+      <a href="https://bit.ly/wethru-consulting" target="_blank" rel="noopener noreferrer" class="btn-kakao">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="#1B2A4A"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6l-.96 3.53c-.08.3.26.54.52.37L10.2 18.6c.59.08 1.19.12 1.8.12 5.52 0 10-3.58 10-7.9S17.52 3 12 3z"/></svg>
-        카카오톡 상담하기
-      </button>
+        무료 상담 신청하기 →
+      </a>
       <button class="btn-form" onclick="openModal()">상담 폼 작성하기 →</button>
     </div>
-    <div class="cta-or fade-up">카카오톡이 더 빠릅니다 · 평균 응답 2시간 이내</div>
+    <div class="cta-or fade-up">무료 상담 신청하기 → · 평균 응답 2시간 이내</div>
     <div class="trust-bar fade-up">
       <div class="trust-item"><div class="t-num">2시간 이내</div><div class="t-label">평균 응답 시간</div></div>
-      <div class="trust-item"><div class="t-num">카카오톡 · 전화 · 이메일</div><div class="t-label">편한 채널로</div></div>
+      <div class="trust-item"><div class="t-num">구글 폼으로 간편하게</div><div class="t-label"></div></div>
       <div class="trust-item"><div class="t-num">₩0</div><div class="t-label">상담료 무료</div></div>
     </div>
   </div>
@@ -540,7 +623,7 @@ footer{background:#1B2A4A;color:rgba(255,255,255,.5);padding:60px 0 32px}
 
 <!-- JS -->
 <script>
-var KAKAO_CHAT_URL='https://pf.kakao.com/_CHANGEME/chat';
+var KAKAO_CHAT_URL='https://bit.ly/wethru-consulting';
 function openKakao(){window.open(KAKAO_CHAT_URL,'_blank');}
 function openModal(){document.getElementById('modalOverlay').classList.add('active');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow='';}
@@ -550,6 +633,32 @@ var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){i
 document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el);});
 document.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');var f=btn.dataset.filter;document.querySelectorAll('.pf-card').forEach(function(card){card.style.display=(f==='all'||card.dataset.category===f)?'':'none';});});});
 function handleSubmit(e){e.preventDefault();alert('상담 신청이 완료되었습니다!');closeModal();e.target.reset();}
+
+// 햄버거 메뉴
+var hamburger=document.getElementById('hamburger');
+var mobileMenu=document.getElementById('mobileMenu');
+var mobileClose=document.getElementById('mobileClose');
+var mobileOverlay=document.getElementById('mobileOverlay');
+
+function toggleMobileMenu(){
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  mobileOverlay.classList.toggle('active');
+  document.body.style.overflow=mobileMenu.classList.contains('active')?'hidden':'';
+}
+
+hamburger.addEventListener('click',toggleMobileMenu);
+mobileClose.addEventListener('click',toggleMobileMenu);
+mobileOverlay.addEventListener('click',toggleMobileMenu);
+
+document.querySelectorAll('.mobile-link').forEach(function(link){
+  link.addEventListener('click',function(){
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow='';
+  });
+});
 </script>
 </body>
 </html>
