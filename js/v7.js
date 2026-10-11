@@ -1,4 +1,4 @@
-/* WeThru V7 — page behaviour. No dependencies.
+/* WeThru V7 (design) — page behaviour. No dependencies.
    This page does not collect or send personal data. Consultation requests are submitted
    by the visitor on Google Forms; the picker below only pre-fills that form's URL. */
 (function () {
@@ -7,6 +7,7 @@
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
 
   /* ---- analytics hook: forwards to a tag manager only if one is installed ---- */
   function track(name, detail) {
@@ -19,6 +20,12 @@
     var el = e.target.closest('[data-track]');
     if (el) track(el.getAttribute('data-track'), el.getAttribute('data-pick') || '');
   });
+
+  /* ---- header: hairline once the page scrolls ---- */
+  var mast = $('.mast');
+  var onScroll = function () { if (mast) mast.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   /* ---- mobile menu ---- */
   var menuBtn = $('.menu-btn');
@@ -35,80 +42,54 @@
       if (e.key === 'Escape' && gnav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); }
     });
     document.addEventListener('click', function (e) {
-      if (gnav.classList.contains('is-open') && !e.target.closest('.masthead')) setMenu(false);
+      if (gnav.classList.contains('is-open') && !e.target.closest('.mast')) setMenu(false);
     });
   }
 
-  /* ---- hero: reviewer notes linked to the deliverable ---- */
-  var review = $('.review');
-  if (review) {
-    var pins = $$('.review__pins li', review);
-    var notes = $$('.review__notes li', review);
-    var tourTimer = null;
-    var setOn = function (n) {
-      pins.concat(notes).forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-pin') === n); });
-    };
-    var stopTour = function () { if (tourTimer) { clearTimeout(tourTimer); tourTimer = null; } };
-    notes.forEach(function (li) {
-      li.addEventListener('mouseenter', function () { stopTour(); setOn(li.getAttribute('data-pin')); });
-      li.addEventListener('mouseleave', function () { setOn(null); });
-    });
-    var start = function () {
-      review.classList.add('is-ready');
-      if (reduceMotion) return;
-      // one guided pass through the notes, then rest
-      var i = 0;
-      var step = function () {
-        if (i >= notes.length) { setOn(null); tourTimer = null; return; }
-        setOn(notes[i].getAttribute('data-pin'));
-        i += 1;
-        tourTimer = setTimeout(step, 1300);
-      };
-      tourTimer = setTimeout(step, 1200);
-    };
-    var img = $('img', review);
-    if (img && !img.complete) { img.addEventListener('load', start, { once: true }); img.addEventListener('error', start, { once: true }); }
-    else start();
+  /* ---- scroll reveal: one pass, then stays ---- */
+  var revealEls = $$('.rv, .flow');
+  if (hasIO && !reduceMotion) {
+    var rio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); rio.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+    revealEls.forEach(function (el) { rio.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---- timeline bars grow when visible ---- */
-  var gantt = $('.gantt');
-  if (gantt) {
-    if ('IntersectionObserver' in window && !reduceMotion) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { if (en.isIntersecting) { gantt.classList.add('is-in'); io.disconnect(); } });
-      }, { threshold: 0.35 });
-      io.observe(gantt);
-    } else gantt.classList.add('is-in');
+  /* ---- current section in the nav ---- */
+  var navLinks = $$('.gnav a[href^="#"]').filter(function (a) { return a.getAttribute('href').length > 1 && !a.classList.contains('gnav__cta'); });
+  var sections = navLinks.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var navTick = false;
+  function markNav() {
+    navTick = false;
+    var line = window.innerHeight * 0.4;
+    var current = null;
+    sections.forEach(function (s, i) {
+      if (!s) return;
+      var r = s.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) current = navLinks[i];
+    });
+    navLinks.forEach(function (a) { a.classList.toggle('is-current', a === current); });
+  }
+  if (navLinks.length) {
+    window.addEventListener('scroll', function () { if (!navTick) { navTick = true; requestAnimationFrame(markNav); } }, { passive: true });
+    markNav();
   }
 
-  /* ---- work tabs (ARIA tabs with roving focus) ---- */
-  var tabs = $$('.wtab');
-  function selectTab(tab, focus) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.classList.toggle('is-active', on);
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      var panel = document.getElementById(t.getAttribute('aria-controls'));
-      if (panel) panel.classList.toggle('is-active', on);
-    });
-    if (focus) tab.focus();
-    if (tab.scrollIntoView && window.matchMedia('(max-width: 819px)').matches) {
-      tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
-    }
-  }
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener('click', function () { selectTab(tab, false); track('work_tab', tab.id.replace('tab-', '')); });
-    tab.addEventListener('keydown', function (e) {
-      var next = null;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = tabs[(i + 1) % tabs.length];
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = tabs[(i - 1 + tabs.length) % tabs.length];
-      else if (e.key === 'Home') next = tabs[0];
-      else if (e.key === 'End') next = tabs[tabs.length - 1];
-      if (next) { e.preventDefault(); selectTab(next, true); }
-    });
-  });
+  /* ---- mobile quick bar: after the hero, hidden over the contact section ---- */
+  var mbar = $('.mbar');
+  var heroEl = $('.hero');
+  var contactEl = $('#contact');
+  if (mbar && hasIO && heroEl) {
+    var pastHero = false;
+    var atContact = false;
+    var sync = function () { mbar.classList.toggle('is-shown', pastHero && !atContact); };
+    new IntersectionObserver(function (en) { pastHero = !en[0].isIntersecting; sync(); }, { threshold: 0 }).observe(heroEl);
+    if (contactEl) new IntersectionObserver(function (en) { atContact = en[0].isIntersecting; sync(); }, { threshold: 0 }).observe(contactEl);
+  } else if (mbar) mbar.classList.add('is-shown');
 
   /* ---- zoom dialog ---- */
   var dlg = $('#zoom');
@@ -135,18 +116,12 @@
     dlg.addEventListener('close', function () { if (lastTrigger) lastTrigger.focus(); });
   }
 
-  /* ---- pricing: one plan at a time on small screens ---- */
-  var switchBtns = $$('.plan-switch button');
-  function showPlan(id) {
-    switchBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-plan') === id)); });
-    $$('.plan').forEach(function (p) { p.classList.toggle('is-active', p.id === 'plan-' + id); });
-  }
-  switchBtns.forEach(function (b) { b.addEventListener('click', function () { showPlan(b.getAttribute('data-plan')); }); });
-
   /* ---- consultation picker → Google Forms pre-fill URL ---- */
   var picker = $('#picker');
   var formLink = $('#form-link');
   var summary = $('#picker-summary');
+  var alias = {};
+  try { alias = JSON.parse((picker && picker.getAttribute('data-alias')) || '{}'); } catch (e) { alias = {}; }
   function checked(name) { return picker ? $('input[name="' + name + '"]:checked', picker) : null; }
   function updateForm() {
     if (!picker || !formLink) return;
@@ -169,10 +144,11 @@
   }
   if (picker) picker.addEventListener('change', updateForm);
 
-  // "이 상품으로 상담하기" buttons pre-select the matching option
+  // "이 상품으로 상담 신청" links pre-select the matching option
   $$('[data-pick]').forEach(function (a) {
     a.addEventListener('click', function () {
       var v = a.getAttribute('data-pick');
+      v = alias[v] || v;
       var input = picker && $('input[name="service"][value="' + v + '"]', picker);
       if (input) { input.checked = true; updateForm(); }
     });
