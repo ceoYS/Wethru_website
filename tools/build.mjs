@@ -438,7 +438,7 @@ function jsonLd() {
       {
         '@type': 'Service', '@id': `${site.url}#service`, name: '사업계획서 · IR 자료 준비 지원', serviceType: '사업계획서 컨설팅',
         provider: { '@id': org }, areaServed: { '@type': 'Country', name: 'KR' }, url: site.url,
-        offers: plans.map((p) => ({ '@type': 'Offer', name: p.name, price: String(p.price), priceCurrency: 'KRW' })),
+        offers: plans.map((p) => p.priceLabel ? ({ '@type': 'AggregateOffer', name: p.name, lowPrice: String(p.price), highPrice: String(2000000), priceCurrency: 'KRW', offerCount: 1 }) : ({ '@type': 'Offer', name: p.name, price: String(p.price), priceCurrency: 'KRW' })),
       },
       {
         '@type': 'FAQPage', '@id': `${site.url}#faq`,
