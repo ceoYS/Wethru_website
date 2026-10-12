@@ -173,7 +173,7 @@ function planBlock(p) {
             <div class="plan__line">
               <h4 class="plan__name">${esc(p.name)}</h4>
               <span class="plan__lead" aria-hidden="true"></span>
-              <p class="plan__price"><b>${won(p.price)}</b>원</p>
+              <p class="plan__price"><b>${p.priceLabel ? esc(p.priceLabel) : won(p.price)}</b>${p.priceLabel ? "" : "원"}</p>
             </div>
             <p class="plan__for">${esc(p.for)}</p>
             <details class="plan__more">
@@ -396,6 +396,7 @@ const footer = () => `
     <nav class="foot__nav" aria-label="하단 메뉴">
       ${nav.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join('\n      ')}
       <a ${ext(links.kakaoChannel)}>카카오톡 채널 ${OUT}</a>
+      <a href="service-guide.html">서비스 · 계약 안내 ${ARROW}</a>
     </nav>
     <dl class="foot__info">
       <div><dt>운영사</dt><dd>${esc(company.operator)}</dd></div>
@@ -437,7 +438,7 @@ function jsonLd() {
       {
         '@type': 'Service', '@id': `${site.url}#service`, name: '사업계획서 · IR 자료 준비 지원', serviceType: '사업계획서 컨설팅',
         provider: { '@id': org }, areaServed: { '@type': 'Country', name: 'KR' }, url: site.url,
-        offers: plans.map((p) => ({ '@type': 'Offer', name: p.name, price: String(p.price), priceCurrency: 'KRW' })),
+        offers: plans.map((p) => p.priceLabel ? ({ '@type': 'AggregateOffer', name: p.name, lowPrice: String(p.price), highPrice: String(2000000), priceCurrency: 'KRW', offerCount: 1 }) : ({ '@type': 'Offer', name: p.name, price: String(p.price), priceCurrency: 'KRW' })),
       },
       {
         '@type': 'FAQPage', '@id': `${site.url}#faq`,
@@ -515,6 +516,10 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>${site.url}</loc>
+    <lastmod>${site.checkedAt}</lastmod>
+  </url>
+  <url>
+    <loc>${site.url}service-guide.html</loc>
     <lastmod>${site.checkedAt}</lastmod>
   </url>
 </urlset>
