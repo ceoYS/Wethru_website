@@ -518,6 +518,10 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <loc>${site.url}</loc>
     <lastmod>${site.checkedAt}</lastmod>
   </url>
+  <url>
+    <loc>${site.url}service-guide.html</loc>
+    <lastmod>${site.checkedAt}</lastmod>
+  </url>
 </urlset>
 `;
 writeFileSync(join(root, 'sitemap.xml'), sitemap);
