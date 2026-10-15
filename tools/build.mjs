@@ -449,7 +449,8 @@ function jsonLd() {
   return JSON.stringify(data, null, 1).replace(/</g, '\\u003c');
 }
 
-const v = { css: hash('css/v7.css'), js: hash('js/v7.js'), font: hash('assets/fonts/pretendard-wt.woff2') };
+// 글꼴은 css/v7.css의 @font-face 주소와 같은 주소로 preload합니다. ?v=를 붙이면 다른 주소가 되어 같은 글꼴을 두 번 받습니다.
+const v = { css: hash('css/v7.css'), js: hash('js/v7.js') };
 
 const html = `<!doctype html>
 <!-- 이 파일은 tools/build.mjs가 content/site.mjs로부터 생성합니다. 직접 수정하지 말고 content/site.mjs를 고친 뒤 빌드하세요. -->
@@ -479,7 +480,7 @@ const html = `<!doctype html>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/brand/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/pretendard-wt.woff2?v=${v.font}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/pretendard-wt.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans+KR:wght@500;600;700&amp;display=swap">
@@ -526,4 +527,4 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 `;
 writeFileSync(join(root, 'sitemap.xml'), sitemap);
 
-console.log('built index.html', `(${Buffer.byteLength(html)} bytes)`, 'css', v.css, 'js', v.js, 'font', v.font);
+console.log('built index.html', `(${Buffer.byteLength(html)} bytes)`, 'css', v.css, 'js', v.js);

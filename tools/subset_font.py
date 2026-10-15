@@ -5,7 +5,7 @@
 """본문 글꼴(Pretendard Variable) 서브셋 생성.
 
 사용법: node tools/build.mjs && uv run tools/subset_font.py
-        (문구를 바꾼 뒤에는 서브셋을 다시 만들고, build를 한 번 더 실행해 캐시 버전을 갱신합니다)
+        (문구를 바꾼 뒤에는 서브셋을 다시 만듭니다. 글꼴 주소에는 ?v=를 붙이지 않습니다: tools/build.mjs의 preload 설명 참고)
 
 - index.html과 js/v7.js에 쓰인 글자 + 기본 문장부호만 남깁니다.
 - 원본 글꼴: tools/fonts-src/PretendardVariable.woff2 (없으면 jsDelivr의 pretendard 1.3.9에서 받습니다. git에는 올리지 않습니다)
