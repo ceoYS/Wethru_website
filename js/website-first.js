@@ -17,6 +17,29 @@
   const bookingSubmit = $('booking-submit');
   let selected = '';
   let slotRequest = 0;
+  let turnstileToken = '';
+  let turnstileWidget = null;
+  const turnstileSiteKey = typeof window.WETHRU_TURNSTILE_SITE_KEY === 'string' ? window.WETHRU_TURNSTILE_SITE_KEY : '';
+  async function setupTurnstile() {
+    if (!turnstileSiteKey || turnstileWidget !== null) return;
+    try {
+      if (!window.turnstile) {
+        await new Promise((resolve,reject)=>{
+          const s=document.createElement('script');
+          s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+          s.onload=resolve;s.onerror=reject;
+          document.head.append(s);
+        });
+      }
+      window.turnstile.ready(()=>{
+        turnstileWidget=window.turnstile.render('#booking-turnstile',{
+          sitekey:turnstileSiteKey,
+          callback:token=>{turnstileToken=token;bookingSubmit.disabled=!(selected&&token);},
+          'expired-callback':()=>{turnstileToken='';bookingSubmit.disabled=true;}
+        });
+      });
+    } catch { bookingMsg.textContent='보안 확인을 불러오지 못했습니다. 카카오톡으로 문의해 주세요.'; }
+  }
   function details() {
     return {
       tenant: 'wethru',
@@ -81,6 +104,7 @@
       bookingMsg.textContent = '아직 실예약 기능이 연결되지 않은 개발 시안입니다. 지금은 기존 상담 신청서 또는 카카오톡으로 문의해 주세요.';
       return;
     }
+    await setupTurnstile();
     const q=++slotRequest;
     bookingMsg.textContent = '실제 가능한 일정을 조회하고 있습니다.';
     try {
@@ -97,7 +121,7 @@
         b.addEventListener('click',()=>{
           selected=iso;
           bookingSlots.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
-          bookingSubmit.disabled=false;
+          bookingSubmit.disabled=!turnstileToken;
         });
         bookingSlots.append(b);
       });
@@ -105,6 +129,7 @@
   });
   bookingSubmit.addEventListener('click',async()=>{
     if (!apiBase || !selected || !valid()) return;
+    if (!turnstileToken) {bookingMsg.textContent='보안 확인을 완료해 주세요.';return;}
     const name=$('booking-name').value.trim(), email=$('booking-email').value.trim();
     if(name.length<2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
       bookingMsg.textContent='예약 안내를 받을 성함과 이메일을 정확히 입력해 주세요.';return;
@@ -113,9 +138,9 @@
     bookingSubmit.disabled=true;
     bookingMsg.textContent='선택한 시간을 예약 시스템에 요청 중입니다.';
     try {
-      const res=await fetch(apiBase+'/api/booking',{
+      const res=await fetch(apiBase+'/api/booking?tenant=wethru',{
         method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',
-        body:JSON.stringify({...details(),name,email,start:selected,consent:true})
+        body:JSON.stringify({...details(),name,email,start:selected,consent:true,turnstileToken})
       });
       const out=await res.json();
       if(!res.ok)throw new Error(out.message||'예약 실패');
@@ -128,7 +153,9 @@
       }else throw new Error('예약 상태를 확인할 수 없습니다.');
     }catch(e){
       bookingMsg.textContent='예약이 확정되지 않았습니다. 이메일을 확인하고, 예약 생성 여부를 확인한 후 다시 시도해 주세요. 필요하면 카카오톡으로 문의해 주세요.';
-      bookingSubmit.disabled=false;
+      turnstileToken='';
+      if(window.turnstile && turnstileWidget!==null) window.turnstile.reset(turnstileWidget);
+      bookingSubmit.disabled=true;
     }
   });
 })();
