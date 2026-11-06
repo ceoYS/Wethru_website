@@ -4,98 +4,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0c1a2e">
-<title>홈페이지 제작·상담 자동화 | WeThru 위쓰루</title>
-<meta name="description" content="업종에 맞는 홈페이지 제작. 인스타그램·블로그에서 찾아온 고객이 서비스와 사례를 확인하고 상담까지 이어지도록 설계합니다. SEO·AI 검색 대응과 예약 연동도 상담하세요.">
+<meta name="theme-color" content="#F6F4F0">
+<title>홈페이지 제작·상담 연결 | WeThru 위쓰루</title>
+<meta name="description" content="서비스와 실제 사례를 명확하게 보여주는 홈페이지. WeThru는 웹사이트 제작부터 SEO·AI 검색 대응 기반, 문의·예약 동선까지 설계합니다.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="홈페이지 제작부터 상담 연결까지 | WeThru">
-<meta property="og:description" content="서비스·사례·견적 문의를 한곳에. 업종별 홈페이지 제작과 상담·예약 동선 설계.">
+<meta property="og:title" content="고객이 찾고, 확인하고, 문의하는 웹사이트 | WeThru">
+<meta property="og:description" content="업종에 맞는 웹사이트 제작과 상담·예약 동선 설계.">
 <link rel="icon" type="image/png" href="assets/brand/favicon-32.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="css/website-first.css">
 <script defer src="js/website-first.js"></script>
 </head>
-<body class="wf">
+<body>
 <a class="skip" href="#main">본문으로 이동</a>
-<header class="nav"><div class="wrap nav__in">
-<a class="brand" href="#top" aria-label="WeThru 홈"><img src="assets/brand/wethru-wordmark.png" alt="WeThru" width="122" height="56"></a>
-<nav class="nav__links" aria-label="주요 메뉴"><a href="#problem">고객의 문제</a><a href="#services">제작 범위</a><a href="#work">제작 사례</a><a href="#search">SEO·AEO</a></nav>
-<a class="nav__cta" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="nav_kakao">카카오톡 상담 ↗</a>
+<header class="site-header" id="siteHeader"><div class="wrap header-in">
+<a class="wordmark" href="#top" aria-label="WeThru 첫 화면"><img src="assets/brand/wethru-wordmark.png" width="100" height="46" alt="WeThru"></a>
+<nav class="primary-nav" id="primary-nav" aria-label="주요 목차">
+<a href="#services">서비스</a><a href="#work">제작 사례</a><a href="#process">진행 방식</a><a href="#about">WeThru 소개</a><a href="#resources">자료실</a>
+</nav>
+<a class="nav-cta" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="nav_kakao">상담하기 <span aria-hidden="true">↗</span></a>
+<button class="menu-toggle" id="menuToggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="메뉴 열기"><span></span><span></span></button>
 </div></header>
 <main id="main">
 <section class="hero wrap" id="top" aria-labelledby="hero-title">
-<div class="hero__copy">
-<p class="eyebrow">WETHRU · WEBSITE & CONVERSION</p>
-<h1 id="hero-title">사업 하나 하는데,<br><em>준비할 게 이렇게나 많다고요?</em></h1>
-<p class="hero__intro">홈페이지부터 검색 노출, 문의·예약 관리까지.<br><strong>대표님은 사업에 집중하세요. WeThru가 온라인 고객 동선을 설계합니다.</strong></p>
-<div class="hero__actions">
-<a class="btn btn--blue" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="hero_kakao">카카오톡으로 바로 상담 ↗</a>
-<a class="btn btn--quiet" href="#work">제작 사례 보기</a>
+<div class="hero-copy">
+<p class="eyebrow">WETHRU / WEBSITE & CONVERSION STUDIO</p>
+<h1 id="hero-title">사업 하나 하는데,<br><em>준비할 게 이렇게나<br class="desktop-only"> 많다고요?</em></h1>
+<p class="hero-lede">홈페이지, 검색 노출, 고객 문의, 예약 관리까지.<br>대표님의 서비스를 제대로 보여주고, 고객이 연락하기 쉬운 구조로 만듭니다.</p>
+<div class="hero-actions"><a class="button button--dark" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="hero_kakao">카카오톡으로 상담하기 <span aria-hidden="true">↗</span></a><a class="button button--text" href="#work">제작 사례 보기 <span aria-hidden="true">↘</span></a></div>
+<p class="micro">상담 무료 · 별도 신청서 없이 바로 문의</p>
 </div>
-<p class="hero__meta">상담 신청 무료 · 제작 의무 없음 · 문의 내용은 카카오톡에서 직접 전송</p>
-</div>
-<div class="journey" aria-label="고객의 온라인 상담 흐름, 기능 구성 예시">
-<div class="journey__top"><span class="live-dot"></span> CUSTOMER FLOW <small>구성 예시</small></div>
-<div class="journey__stage"><span class="journey__num">01</span><div><b>유입</b><small>인스타그램 · 블로그 · 검색</small></div><span>↗</span></div>
-<div class="journey__line"></div>
-<div class="journey__stage journey__stage--mid"><span class="journey__num">02</span><div><b>확인</b><small>서비스 · 실제 작업 · 비용 안내</small></div><span>↗</span></div>
-<div class="journey__line"></div>
-<div class="journey__stage journey__stage--blue"><span class="journey__num">03</span><div><b>문의</b><small>상담 신청 · 예약 연결</small></div><span>✓</span></div>
-<div class="journey__foot"><span>WeThru</span><span>발견에서 문의까지</span></div>
+<div class="hero-panel" aria-label="홈페이지의 역할을 설명하는 세 단계">
+<div class="hero-panel__top"><span>YOUR BUSINESS, CLEARLY</span><span>W / 01</span></div>
+<div class="hero-panel__headline">고객의 다음 행동까지<br>설계합니다.</div>
+<ol class="hero-panel__steps"><li><span>01</span><strong>발견</strong><small>검색 · 인스타그램 · 블로그</small></li><li><span>02</span><strong>확인</strong><small>서비스 · 작업 사례 · 신뢰 정보</small></li><li><span>03</span><strong>문의</strong><small>상담 신청 · 예약 연결</small></li></ol>
+<div class="hero-panel__footer"><span>WE BUILD THE CONNECTION</span><span>↓</span></div>
 </div>
 </section>
-<section class="statement" id="problem"><div class="wrap statement__in">
-<p class="eyebrow">WHY YOUR WEBSITE MATTERS</p>
-<h2>대표님의 서비스가 좋아도,<br><em>고객에게 제대로 보여야 합니다.</em></h2>
-<p>시공 사진을 매번 보내고, DM에서 같은 질문에 답하고, 예약 시간을 따로 조율하고 있나요? 그 과정을 줄이는 것부터 시작합니다.</p>
+<nav class="page-index wrap" aria-label="페이지 목차"><span>INDEX</span><a href="#services">01 서비스</a><a href="#work">02 제작 사례</a><a href="#process">03 진행 방식</a><a href="#about">04 소개</a><a href="#resources">05 자료실</a><a href="#contact">06 문의</a></nav>
+
+<section class="intro section" id="problem"><div class="wrap intro-grid">
+<p class="eyebrow">THE PROBLEM</p>
+<div><h2>서비스가 좋아도,<br>고객이 모르면 선택할 수 없습니다.</h2>
+<p>시공 사진은 인스타그램에, 설명은 블로그에, 상담은 DM에 흩어져 있지 않나요? 고객이 필요한 정보를 한곳에서 확인하고 바로 문의하도록 정리합니다.</p></div>
 </div></section>
-<section class="section wrap" aria-labelledby="problem-title">
-<div class="section__head"><span class="eyebrow">CUSTOMER PAIN</span><h2 id="problem-title">고객이 연락하기까지<br>막히는 곳 세 가지</h2></div>
-<div class="pain-grid">
-<article class="pain"><span class="pain__n">01 / 정보</span><h3>사례가 흩어져 있음</h3><p>고객이 시공 사례와 서비스 범위를 쉽게 찾지 못합니다.</p><strong>→ 사례·서비스 한곳에 정리</strong></article>
-<article class="pain"><span class="pain__n">02 / 문의</span><h3>같은 질문 반복</h3><p>지역, 비용, 진행 방식에 매번 답해야 합니다.</p><strong>→ 자주 묻는 질문·사전 정보 수집</strong></article>
-<article class="pain"><span class="pain__n">03 / 예약</span><h3>일정 조율이 번거로움</h3><p>DM과 전화로 시간을 여러 번 확인합니다.</p><strong>→ 업체에 맞는 예약 방식 연결</strong></article>
-</div></section>
-<section class="section section--pale" id="services"><div class="wrap">
-<div class="section__head"><span class="eyebrow">SERVICES</span><h2>필요한 기능만 만듭니다.</h2><p>이미 쓰는 인스타그램·블로그·네이버 예약은 유지하고 부족한 부분만 보완할 수 있습니다.</p></div>
-<div class="service-grid">
-<article class="service"><span>01 / WEBSITE</span><h3>홈페이지 제작</h3><p>사업 소개, 서비스, 실제 사례, 상담 안내를 한곳에 정리합니다.</p><ul><li>모바일 대응</li><li>서비스·사례 페이지</li><li>문의 버튼 연결</li></ul><a href="#contact">제작 문의 ↗</a></article>
-<article class="service service--primary"><span>02 / CONSULT</span><h3>상담·예약 연결</h3><p>고객 정보 수집과 일정 안내를 업종에 맞춰 설계합니다.</p><ul><li>견적 사전 질문</li><li>예약 캘린더 연동</li><li>필요 시 AI 응대 기능</li></ul><p class="service__caution">추가 개발 항목 · 구축 범위와 비용 별도 협의</p><a href="#contact">기능 문의 ↗</a></article>
-<article class="service"><span>03 / SEARCH</span><h3>SEO·AI 검색 대응</h3><p>검색엔진이 서비스 정보를 읽을 수 있도록 웹사이트 구조와 내용을 정리합니다.</p><ul><li>검색 메타정보·사이트맵</li><li>서비스·지역·FAQ 정보</li><li>AI 검색 대응을 위한 콘텐츠 기반</li></ul><a href="#search">자세히 보기 ↗</a></article>
+
+<section class="section wrap" id="services">
+<div class="section-head"><p class="eyebrow">01 / SERVICES</p><h2>필요한 것부터 만듭니다.</h2><p>홈페이지를 먼저 만들고, 필요한 경우 상담·예약과 검색 대응을 연결합니다.</p></div>
+<div class="service-list">
+<article class="service-row"><div class="service-id">01 <span>/ CORE</span></div><div><h3>웹사이트 제작</h3><p>서비스, 가격 기준, 실제 사례, 문의 방법을 읽기 쉽게 정리합니다.</p></div><ul><li>모바일 대응</li><li>작업 사례·서비스 안내</li><li>상담 동선</li></ul></article>
+<article class="service-row"><div class="service-id">02 <span>/ OPTION</span></div><div><h3>상담·예약 연결</h3><p>고객이 필요한 정보를 남기고 상담 일정까지 선택할 수 있는 구조를 설계합니다.</p></div><ul><li>사전 견적 질문</li><li>일정·알림 연동</li><li>필요 시 AI 응대</li></ul></article>
+<article class="service-row"><div class="service-id">03 <span>/ OPTION</span></div><div><h3>검색·AI 검색 대응</h3><p>사업 정보를 검색엔진이 읽을 수 있는 형태로 정리합니다.</p></div><ul><li>SEO 기본 구조</li><li>서비스·지역·FAQ</li><li>AI 검색 콘텐츠 기반</li></ul></article>
 </div>
-<div class="pricing"><div><small>기본 홈페이지 제작</small><p><b>79만 원</b><span> (VAT 별도 · 기본 구성 기준)</span></p><p>페이지 수·작업 범위에 따라 견적을 확정합니다. AI 상담·예약 연동은 별도입니다.</p></div><a class="btn btn--blue" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="pricing_kakao">제작 상담 ↗</a></div>
-</div></section>
-<section class="section wrap" id="work">
-<div class="section__head"><span class="eyebrow">WORK</span><h2>사이트를 직접 확인해 보세요.</h2></div>
-<div class="proof-grid">
-<a href="https://ikkiarchive.com/" target="_blank" rel="noopener noreferrer" class="proof"><small>실내조경 사이트</small><h3>ikki archive</h3><p>작업 사진과 프로젝트 중심 구성</p><b>사이트 보기 ↗</b></a>
-<a href="https://interior.wethru.com/" target="_blank" rel="noopener noreferrer" class="proof"><small>인테리어 제작 시연</small><h3>WeThru Interior</h3><p>업종별 홈페이지 디자인 확인</p><b>시연 페이지 보기 ↗</b></a>
-</div><p class="note">상담·예약 증가 등 검증되지 않은 성과 수치는 표시하지 않습니다.</p>
+<div class="price-line"><div><span>WEBSITE START</span><strong>79만 원부터 <small>VAT 별도</small></strong><p>기본 홈페이지 제작 기준 · 상세 범위는 상담 후 견적 확정<br>AI 상담·예약·별도 운영 서비스는 추가 협의</p></div><a href="service-guide.html#websites">서비스·계약 안내 <span aria-hidden="true">↗</span></a></div>
 </section>
-<section class="section section--navy" id="search"><div class="wrap search-grid">
-<div><span class="eyebrow">SEO / AEO</span><h2>검색되는 정보의<br>기본은 웹사이트입니다.</h2></div>
-<div><p class="search-lead">AI로 콘텐츠를 만드는 속도는 빨라졌지만, 고객에게 필요한 정보는 여전히 정확해야 합니다.</p>
-<p>대표님의 서비스, 지역, 실제 사례, 가격 기준, 문의 방법을 웹사이트에 구체적으로 담습니다. 이를 바탕으로 SEO와 AI 검색 대응을 준비합니다.</p>
-<p class="search-foot">검색 순위·AI 추천·매출 증가는 보장하지 않습니다. <a href="https://developers.google.com/search/docs/appearance/ai-features?hl=ko" target="_blank" rel="noopener noreferrer">Google 공식 검색 가이드 ↗</a></p></div>
-</div></section>
-<section class="section wrap" id="faq">
-<div class="section__head"><span class="eyebrow">FAQ</span><h2>자주 묻는 질문</h2></div>
-<div class="faq">
-<details><summary>인스타그램만 있어도 되지 않나요?</summary><p>반복 문의 없이 운영이 잘된다면 홈페이지가 급하지 않을 수 있습니다. 사례·서비스·연락 정보를 한곳에서 보여줘야 할 때 제작을 권합니다.</p></details>
-<details><summary>네이버 예약을 사용하고 있어도 필요한가요?</summary><p>기존 예약 도구가 충분하다면 그대로 사용합니다. 사전 견적 질문이나 복잡한 상담이 필요할 때만 추가 기능을 검토합니다.</p></details>
-<details><summary>AI 챗봇과 예약 기능도 기본 가격에 포함되나요?</summary><p>아닙니다. 기본 홈페이지 제작과 별도이며, 필요한 기능과 운영 비용을 먼저 안내합니다.</p></details>
+
+<section class="section work-section" id="work"><div class="wrap">
+<div class="section-head"><p class="eyebrow">02 / SELECTED WORK</p><h2>작업 결과를 직접 보세요.</h2></div>
+<div class="work-grid">
+<a class="work-item" href="https://ikkiarchive.com/" target="_blank" rel="noopener noreferrer"><div class="work-visual work-visual--ikki" aria-hidden="true"><span>ikki archive</span><span>SPACE & GREENERY</span></div><div class="work-details"><div><small>실내조경 · 웹사이트 사례</small><h3>ikki archive</h3><p>작업 사례와 서비스 소개 중심 구성</p></div><span class="work-arrow" aria-hidden="true">↗</span></div></a>
+<a class="work-item" href="https://interior.wethru.com/" target="_blank" rel="noopener noreferrer"><div class="work-visual work-visual--interior" aria-hidden="true"><span>WeThru / Interior</span><span>WEBSITE SHOWCASE</span></div><div class="work-details"><div><small>업종별 디자인 · 시연 페이지</small><h3>WeThru Interior</h3><p>인테리어 업체를 위한 웹사이트 구성</p></div><span class="work-arrow" aria-hidden="true">↗</span></div></a>
 </div>
-</section>
-<section class="contact" id="contact"><div class="wrap contact-grid">
-<div><span class="eyebrow">CONTACT</span><h2>어떤 홈페이지가 필요하신가요?</h2><p>현재 인스타그램·블로그·사이트 주소가 있다면 카카오톡에 보내주세요. 먼저 필요한 작업을 안내하겠습니다.</p>
-<p class="contact__hint">별도 신청서 작성 없이 바로 대화할 수 있습니다.</p></div>
-<div class="contact__action">
-<p class="contact__label">상담 신청</p>
-<a class="btn btn--blue contact__primary" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="contact_kakao">카카오톡으로 바로 문의하기 ↗</a>
-<p class="contact__note">상담 무료 · 제작 의무 없음 · 메시지를 보내야 접수됩니다.</p>
-<div class="contact__alt"><span>카카오톡 이용이 어렵다면</span><a href="https://forms.gle/d66adwLQzBpE8VDg6" target="_blank" rel="noopener noreferrer" data-track="contact_form">상담 신청서 ↗</a><a href="mailto:ceo@nitual.com" data-track="contact_email">이메일 문의 ↗</a></div>
+<p class="fineprint">카드는 각 사이트의 소개용 타이포그래피 이미지이며 실제 화면 캡처는 아닙니다. 예약·매출 개선 수치가 확인되지 않아 성과로 표기하지 않습니다.</p>
+</div></section>
+
+<section class="section wrap" id="process"><div class="section-head"><p class="eyebrow">03 / PROCESS</p><h2>제작은 이렇게 진행합니다.</h2></div>
+<ol class="process-list">
+<li><span>01</span><div><strong>상담</strong><p>업종, 기존 채널, 필요한 기능 확인</p></div></li>
+<li><span>02</span><div><strong>구조 설계</strong><p>서비스·사례·문의 흐름 정리</p></div></li>
+<li><span>03</span><div><strong>제작·검수</strong><p>PC·모바일 화면과 버튼 동작 점검</p></div></li>
+<li><span>04</span><div><strong>연결·납품</strong><p>도메인·상담 경로 연결 및 전달</p></div></li>
+</ol><p class="process-note">기간·수정 횟수·운영 비용은 작업 범위에 따라 계약 전에 안내합니다.</p></section>
+
+<section class="section seo-section" id="search"><div class="wrap seo-grid">
+<div><p class="eyebrow">SEARCH / SEO & AEO</p><h2>인스타그램은 유입을,<br>웹사이트는 정보를.</h2></div>
+<div><p class="seo-lead">대표님의 서비스가 검색되고 이해되려면, 먼저 정확한 정보가 필요합니다.</p><p>서비스 지역, 제공 범위, 실제 사례, 질문과 답변을 웹사이트에 담고 검색엔진이 읽을 수 있게 구성합니다. 이 기초가 SEO와 AI 검색 대응의 출발점입니다.</p><p class="fineprint">검색 순위, AI 추천, 매출 증가는 보장하지 않습니다. <a href="https://developers.google.com/search/docs/appearance/ai-features?hl=ko" target="_blank" rel="noopener noreferrer">Google 공식 가이드 ↗</a></p></div>
+</div></section>
+
+<section class="section wrap" id="about"><div class="about-grid">
+<div><p class="eyebrow">04 / ABOUT WETHRU</p><h2>WeThru는<br>무슨 일을 하나요?</h2></div>
+<div class="about-body"><p class="about-lead">대표님의 사업을 고객이 이해하기 쉬운 웹사이트로 만듭니다.</p><p>서비스를 설명하는 문장부터 작업 사례의 배치, 검색 노출에 필요한 정보, 상담 버튼까지 함께 설계합니다. 기존 인스타그램·블로그·예약 도구는 필요한 만큼 연결합니다.</p>
+<dl><div><dt>브랜드</dt><dd>WeThru · 위쓰루</dd></div><div><dt>운영사</dt><dd>주식회사 나이츄얼랩스</dd></div><div><dt>하는 일</dt><dd>웹사이트 · 비즈니스 프로필 · 사업 소개 자료</dd></div><div><dt>문의</dt><dd><a href="mailto:ceo@nitual.com">ceo@nitual.com</a></dd></div></dl>
 </div></div></section>
+
+<section class="section resource-section" id="resources"><div class="wrap">
+<div class="section-head"><p class="eyebrow">05 / RESOURCES</p><h2>관련 서비스와 자료</h2><p>필요한 내용은 아래에서 바로 확인할 수 있습니다.</p></div>
+<div class="resource-grid">
+<a href="service-guide.html#websites" class="resource-item"><span>01 / GUIDE</span><h3>제작·계약 안내</h3><p>견적, 수정, 납품과 운영 비용 기준</p><span class="resource-arrow">↗</span></a>
+<a href="https://interior.wethru.com/" target="_blank" rel="noopener noreferrer" class="resource-item"><span>02 / WEB</span><h3>인테리어 홈페이지</h3><p>업종별 페이지 구성과 디자인 시연</p><span class="resource-arrow">↗</span></a>
+<a href="https://profile.wethru.com/" target="_blank" rel="noopener noreferrer" class="resource-item"><span>03 / PROFILE</span><h3>비즈니스 프로필</h3><p>대표 소개·경력·포트폴리오 페이지</p><span class="resource-arrow">↗</span></a>
+<a href="https://guides.wethru.com/#guide/harvey-core" target="_blank" rel="noopener noreferrer" class="resource-item"><span>04 / INSIGHTS</span><h3>AI 활용 자료</h3><p>WeThru Studio의 AI 활용 가이드</p><span class="resource-arrow">↗</span></a>
+</div>
+<div class="other-service"><span>OTHER SERVICES</span><p>사업계획서 검토·IR 발표자료 등 기존 서비스도 상담할 수 있습니다.</p><a href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="other_kakao">문의하기 ↗</a></div>
+</div></section>
+
+<section class="section wrap" id="faq"><div class="section-head"><p class="eyebrow">FAQ</p><h2>자주 묻는 질문</h2></div><div class="faq-list">
+<details><summary>인스타그램이나 블로그가 있으면 홈페이지는 필요 없지 않나요?<span>+</span></summary><p>모든 사업에 필요한 건 아닙니다. 다만 서비스·사례·문의 방법을 한곳에서 보여줘야 한다면 홈페이지가 도움이 됩니다.</p></details>
+<details><summary>네이버 예약을 쓰고 있어도 상담 기능을 붙여야 하나요?<span>+</span></summary><p>기존 도구로 충분하면 유지합니다. 복잡한 견적 질문이나 일정 조율이 필요한 경우에 추가 연동을 검토합니다.</p></details>
+<details><summary>79만 원에 AI 챗봇과 예약 시스템도 포함되나요?<span>+</span></summary><p>아닙니다. 기본 홈페이지 제작 기준 가격이며, AI·예약 연동과 운영 비용은 범위를 확인한 뒤 별도로 안내합니다.</p></details>
+</div></section>
+
+<section class="contact-section" id="contact"><div class="wrap contact-grid">
+<div><p class="eyebrow">06 / CONTACT</p><h2>우리 사업에 맞는<br>홈페이지부터 확인해 보세요.</h2><p>기존 인스타그램·블로그 주소만 보내주셔도 됩니다.</p></div>
+<div class="contact-actions"><a class="button button--light" href="https://pf.kakao.com/_wRVBX/chat" target="_blank" rel="noopener noreferrer" data-track="contact_kakao">카카오톡으로 바로 상담하기 <span aria-hidden="true">↗</span></a><p>상담 무료 · 신청서 작성 불필요 · 카카오톡에서 메시지를 보내야 접수됩니다.</p><div class="contact-alt"><a href="https://forms.gle/d66adwLQzBpE8VDg6" target="_blank" rel="noopener noreferrer" data-track="contact_form">상담 신청서 ↗</a><a href="mailto:ceo@nitual.com" data-track="contact_email">이메일 문의 ↗</a></div></div>
+</div></section>
 </main>
-<footer class="footer"><div class="wrap footer__in"><div><b>WeThru</b><p>홈페이지 제작 · 상담 연결</p></div><div><a href="https://interior.wethru.com/" target="_blank" rel="noopener noreferrer">WeThru Interior ↗</a><a href="https://profile.wethru.com/" target="_blank" rel="noopener noreferrer">Business Profile ↗</a><a href="mailto:ceo@nitual.com">ceo@nitual.com</a></div></div><div class="wrap footfine">© WeThru · 미배포 개발 시안 · AI 예약 기능은 실제 연결 전입니다.</div></footer>
-</body></html>
+<footer class="site-footer"><div class="wrap footer-main"><div><strong>WeThru</strong><p>웹사이트 제작 · 상담 연결</p></div><div><a href="#top">맨 위로 ↑</a><a href="service-guide.html#websites">서비스 안내</a><a href="mailto:ceo@nitual.com">ceo@nitual.com</a></div></div><div class="wrap footer-bottom"><span>주식회사 나이츄얼랩스 · WeThru</span><span>© 2026 WeThru</span></div></footer>
+</body>
+</html>
