@@ -72,6 +72,6 @@ test('click tracking is optional and not fake lead collection',()=>{
 
 test('preview build uses Node global process, not the imported content process object',()=>{
  const build=read('tools/build.mjs');
- assert.match(build,/globalThis\\.process\\.exit\\(0\\)/);
- assert.doesNotMatch(build,/^  process\\.exit\\(0\\);$/m);
+ assert.match(build,/globalThis\.process\.exit\(0\)/);
+ assert.doesNotMatch(build,/^  process\.exit\(0\);$/m);
 });
