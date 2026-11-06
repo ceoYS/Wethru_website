@@ -11,14 +11,14 @@ Pivot the WeThru homepage from government-funded business plan/IR-first to:
 3. clear search-readable SEO content with appropriate expectations about AEO/AI search,
 4. consultation and actual booking handoff (bookings only after authorized live integrations).
 
-Hero: "사업 하나 하는데, 준비할 게 이렇게나 많다고요?"
+Hero: "사업 하나 하는데, 준비할 게 이렇게나 많다고요?". Keep copy short, specific, non-promissory; no decorative claims.
 Audience: small owner-operated companies, interior/landscape contractors, beauty/appointment services, car detailing, professional services. Pain: buried portfolio, repetitive DM/phone Q&A, scattered service information, calendar back-and-forth, poor mobile discovery. No assertion that websites guarantee sales or AI search exposure.
 
 ## Files changed
-- `index.html`: branch-only homepage, `noindex,nofollow`, original WeThru wordmark path retained.
+- `index.html`: concise website-first homepage, `noindex,nofollow`, original WeThru wordmark path retained; primary CTA opens KakaoTalk directly without requiring on-site form fields.
 - `content/website-first.html`: homepage canonical source for this branch.
-- `css/website-first.css`: desktop/mobile styles, keyboard focus and reduced motion.
-- `js/website-first.js`: lead form prefills **existing Google Form**; customer must press submit on Google Forms. No hidden lead capture. Optional booking UI fails closed until configured.
+- `css/website-first.css`: desktop/mobile styles, keyboard focus and reduced motion. Pretendard Variable (official dynamic subset CDN) is loaded first, with locally hosted subset font fallback.
+- `js/website-first.js`: optional CTA click measurement if GA4 is already configured. The primary CTA opens existing KakaoTalk chat directly (no mandatory on-site fields). Optional Google Form and email links remain. No hidden lead capture, no in-page booking claim.
 - `api/booking.js`: reusable multi-tenant Cal.com v2 server-side adapter, requires configured external backend and anti-abuse controls. GitHub Pages **cannot execute** this handler.
 - `tools/build.mjs`: if website-first source exists, copies it to root `index.html`; otherwise previous business-plan site generator behavior remains.
 - `docs/WEBSITE_FIRST_CONVERSION_PREVIEW.md`: this note.
@@ -38,8 +38,8 @@ Do not push changes to main or enable auto-deployment. Old approved pages and as
 
 ## Status at commit time
 - New website-first copy, layout, SEO text, industry pains, actual portfolio links, FAQ: **committed; visual/manual browser QA still required**.
-- Website lead intake: existing Google Forms remains an actual submission option, but the homepage itself **does not submit** until the user completes Google Forms.
-- Booking API: **code committed, NOT live**. No Cal.com credentials, event type, Turnstile keys, private policy or dedicated backend deployment have been activated or tested with real appointments.
+- Website lead intake: the primary KakaoTalk CTA opens a real chat; the customer must send a message. Optional Google Forms requires final submission on the form, and email requires sending from the mail app. Nothing on this page auto-submits personal data.
+- Booking API: **code committed, NOT live**. No Cal.com credentials, event type, Turnstile keys, privacy policy or separate backend deployment have been activated or tested with real appointments. The unconnected booking button was removed from the visible homepage to avoid unnecessary friction.
 - AI chat: **not implemented**. Do not describe this branch as a live AI chat agent. A structured FAQ/form and booking handoff should be tested before adding an LLM.
 - Analytics/conversion improvement: **not verified**.
 - Government business plan/IR: mentioned as secondary service, original detailed guide remains on main. No business plan/IR outcome guarantee.
@@ -69,8 +69,8 @@ All IDs above are **illustrative placeholders**, not existing event IDs. Enable 
 ## Production release blockers / acceptance gates
 1. Owner approves revised positioning, copy, logo, price (79만원 VAT 별도 basic package), specific scope and delivery terms.
 2. Verify current portfolio URLs and any permission to publish Ikki as a case; no unsupported conversion metrics.
-3. Confirm Google Forms checkbox options and privacy disclosure, and manual 2-way end-to-end submissions.
-4. Set up tenant-specific Cal.com event types, authorized calendars, emails, anti-spam limits and privacy policy (including third-party processing and retention).
+3. Confirm KakaoTalk 1-click chat works (customer still has to send a message), and optional Google Forms/Email destinations work; check consent and real submission on their own services.
+4. Set up tenant-specific Cal.com event types, authorized calendars, emails, anti-spam limits and privacy policy (including third-party processing and retention). Once connected, add the booking UI as an optional secondary path; keep immediate KakaoTalk chat available.
 5. Real test on desktop and mobile: slots → one booking → actual email/calendar event → cancel/reschedule; error cases (conflict, double click, provider error, token expiry), accessibility and keyboard, broken images, contrast, page speed.
 6. Explicitly decide when to add AI Q&A with a verified per-tenant knowledge base and human handoff; do not invent quotations, prices or available slots.
 7. Review SEO canonical/OG; remove preview `noindex` only for approved production release and submit sitemap.
