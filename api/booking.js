@@ -89,7 +89,8 @@ export default async function handler(req,res) {
     });
     const booking=created?.data || {};
     if(!booking.uid)throw new Error('no_booking_confirmation');
-    const status=booking.status==='accepted'?'accepted':'pending';
+    if(!['accepted','pending'].includes(booking.status))throw new Error('unknown_booking_state');
+    const status=booking.status;
     return res.status(201).json({status,bookingUid:booking.uid});
   } catch(err) {
     // Do not expose provider tokens, private data, raw provider errors.
