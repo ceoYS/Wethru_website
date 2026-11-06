@@ -15,7 +15,7 @@ try {
   const reviewMarkup = readFileSync(reviewHome, 'utf8');
   writeFileSync(join(root, 'index.html'), '<!-- REVIEW BRANCH ONLY: no production deployment; source content/website-first.html -->\n' + reviewMarkup);
   console.log('Website-first review homepage generated. No deployment performed.');
-  process.exit(0);
+  globalThis.process.exit(0);
 } catch (err) {
   if (err?.code !== 'ENOENT') throw err;
 }
