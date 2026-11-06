@@ -8,6 +8,18 @@ import { dirname, join } from 'node:path';
 import * as C from '../content/site.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const reviewHome = join(root, 'content/website-first.html');
+// Only this review branch carries this source. Avoid overwriting the new homepage
+// from the older business-plan generator; main branch continues unchanged.
+try {
+  const reviewMarkup = readFileSync(reviewHome, 'utf8');
+  writeFileSync(join(root, 'index.html'), '<!-- REVIEW BRANCH ONLY: no production deployment; source content/website-first.html -->\n' + reviewMarkup);
+  console.log('Website-first review homepage generated. No deployment performed.');
+  process.exit(0);
+} catch (err) {
+  if (err?.code !== 'ENOENT') throw err;
+}
+
 const { site, links, company, seo, nav, hero, work, services, approach, timing, process, faq, others, contact } = C;
 
 const esc = (s = '') => String(s)
