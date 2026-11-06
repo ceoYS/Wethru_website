@@ -152,7 +152,7 @@
         bookingSlots.replaceChildren();selected='';
       }else throw new Error('예약 상태를 확인할 수 없습니다.');
     }catch(e){
-      bookingMsg.textContent='예약이 확정되지 않았습니다. 이메일을 확인하고, 예약 생성 여부를 확인한 후 다시 시도해 주세요. 필요하면 카카오톡으로 문의해 주세요.';
+      bookingMsg.textContent='예약 확정 여부를 확인하지 못했습니다. 이메일을 확인한 뒤, 이미 예약됐는지 확인하고 다시 시도해 주세요. 필요하면 카카오톡으로 문의해 주세요.';
       turnstileToken='';
       if(window.turnstile && turnstileWidget!==null) window.turnstile.reset(turnstileWidget);
       bookingSubmit.disabled=true;
