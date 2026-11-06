@@ -43,17 +43,18 @@ async function slots(cfg) {
   const out=await calRequest(cfg,'/slots?'+params);
   return extractSlots(out).filter(s=>Date.parse(s)>Date.now()).slice(0,100);
 }
-async function verifyTurnstile(token,ip) {
+async function verifyTurnstile(token,ip,cfg) {
   if(!process.env.TURNSTILE_SECRET_KEY || !token) return false;
   const form=new URLSearchParams({secret:process.env.TURNSTILE_SECRET_KEY,response:token});
   if(ip) form.set('remoteip',ip);
   const response=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:form});
   const result=await response.json().catch(()=>({success:false}));
-  return result.success===true;
+  const hostnames=(cfg.origins || []).map(x=>{try{return new URL(x).hostname;}catch{return '';}});
+  return result.success===true && hostnames.includes(result.hostname);
 }
 export default async function handler(req,res) {
   res.setHeader('Cache-Control','no-store, private');
-  const tenant=clean(req.method==='GET'?req.query?.tenant:req.body?.tenant,36);
+  const tenant=clean(req.query?.tenant || req.body?.tenant,36);
   const cfg=tenants()[tenant];
   if(!cfg || !Number.isInteger(Number(cfg.eventTypeId)) || !/^CAL_API_KEY_[A-Z0-9_]+$/.test(cfg.apiKeyEnv||'')) return bad(res,503,'예약 시스템이 준비되지 않았습니다.');
   const origin=clean(req.headers.origin,255);
@@ -75,7 +76,7 @@ export default async function handler(req,res) {
     if(when<Date.now()+10*60000 || when>Date.now()+15*86400000) return bad(res,400,'예약 가능 범위를 벗어났습니다.');
     // Every booking requires a server-verified captcha. No secret => fail closed.
     const ip=(req.headers['x-forwarded-for']||'').split(',')[0].trim();
-    if(!await verifyTurnstile(clean(b.turnstileToken,2048),ip))return bad(res,403,'보안 확인을 완료해 주세요.');
+    if(!await verifyTurnstile(clean(b.turnstileToken,2048),ip,cfg))return bad(res,403,'보안 확인을 완료해 주세요.');
     const possible=await slots(cfg);
     if(!possible.some(x=>Date.parse(x)===when))return bad(res,409,'이미 마감된 시간입니다. 다른 시간을 선택해 주세요.');
     const created=await calRequest(cfg,'/bookings',{
